@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<project name="BatalhaNaval" default="testar">
+	<description>
+            Testes do projeto Ludo
+    </description>
+    <property name="equipe" value="nome1.nome2"/>
+    <property name="project.name" value="ludo"/>
+	<property name="home" value="." />
+	<property name="src.home" value="${home}/src" />
+	<property name="send" value="${home}/send" />
+	<property name="send.home" value="${send}/${project.name}" />
+	<property name="lib.home" value="${home}/lib" />
+	<property name="build.home" value="${home}/bin" />
+	<property name="scriptDir" value="${home}/scripts"/>	
+
+    <property file="build.properties"/>
+	
+	  <property name="compile.debug"       value="true"/>
+	  <property name="compile.deprecation" value="false"/>
+	  <property name="compile.optimize"    value="true"/>
+
+	  <path id="compile.classpath">
+	  	<pathelement location="${build.home}"/>
+	    <fileset dir="${lib.home}">
+	      <include name="*.jar"/>
+	    </fileset>
+	  </path>
+	
+
+	<target name="all" depends="compile">
+	</target>
+
+	<target name="clean" description="Delete old build directories">
+		<delete dir="${build.home}"/>
+		<delete dir="${send}"/>
+		<delete dir="${home}/enviar"/>
+	</target>
+
+	
+	  <target name="prepare">
+	    <mkdir  dir="${build.home}"/>
+	  </target>
+	
+	  <target name="compile" depends="prepare"
+	   description="Compile Java src.homes">
+
+	    <javac srcdir="${src.home}"
+	          destdir="${build.home}"
+	            debug="${compile.debug}"
+	      deprecation="${compile.deprecation}"
+	         optimize="${compile.optimize}">
+	        <classpath refid="compile.classpath"/>
+	    </javac>
+
+	    <copy  todir="${build.home}">
+	      <fileset dir="${src.home}" excludes="**/*.java"/>
+	    </copy>
+
+	  </target>
+	
+	<target name="testar" depends="compile">
+		<echo/>
+		<echo message="EasyAccept"/>
+		<echo/>
+		<java fork="yes" classname="easyaccept.EasyAccept">
+			<arg value="${facade}" />
+			<arg value="${scriptDir}" />
+			<classpath refid="compile.classpath"/>
+		</java>
+	</target>
+	
+	<target name="send" depends="clean">
+		<mkdir dir="${send.home}"/>
+
+		<copy todir="${send.home}">
+			<fileset dir="${home}">
+      			<exclude name="send/"/>
+      			<exclude name="enviar/"/>
+      			<exclude name="cvs/"/>
+      			<exclude name="bin/"/>
+		      	<exclude name="**/script*.txt"/>
+		      	<exclude name="**/.*"/>
+		      	<exclude name="**/.*/"/>
+			</fileset>
+		</copy>
+		
+		<!--<zip destfile="${send}/${project.name}.zip"
+		       basedir="${send.home}"/>
+		<delete dir="${send.home}"/> -->
+	</target>
+
+	<target name="empacotar" depends="clean">
+		<mkdir dir="${home}/enviar/${project.name}"/>
+
+		<copy todir="${home}/enviar/${project.name}">
+			<fileset dir="${home}">
+      			<include name="src/"/>
+      			<include name="doc/"/>
+      			<include name="scripts/"/>
+      			<include name="tests/"/>
+			</fileset>
+		</copy>
+
+		<zip destfile="${home}/enviar/projeto.${equipe}.zip"
+		       basedir="${home}/enviar/${project.name}"/>
+		       
+		<delete dir="${home}/enviar/${project.name}"/>
+		
+		<echo/>
+		<echo message="***********************************"/>
+		<echo message="Verifique se ha erros de compilacao."/>
+		<echo message="Verifique se os testes estao passando."/>
+		<echo message="Envie o arquivo `projeto.${equipe}.zip` para o professor."/>
+		<echo/>
+		
+	</target>
+	
+</project>
+

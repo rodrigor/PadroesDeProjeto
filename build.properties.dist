@@ -1,0 +1,10 @@
+# Prof.: Rodrigo Reboucas de Almeida
+# http://www.rodrigor.com/disciplinas/projetos
+# Atencao! Mude o valor do parametro "home" a seguir, 
+# para o diretorio onde seu projeto esta localizado!
+home=<home>
+
+# Coloque o nome da equipe a seguir.
+equipe=<sua equipe>
+
+facade=com.rodrigor.padroes.facade.hometheater.CinemaFacade

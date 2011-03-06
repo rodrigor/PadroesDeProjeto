@@ -1,0 +1,34 @@
+# Teste b‡sico
+
+
+setVolumeMaximo volume=5
+expect 5 getVolumeMaximo
+
+expect 0 getVolume
+aumentarVolume
+expect 1 getVolume
+aumentarVolume
+expect 2 getVolume
+aumentarVolume
+aumentarVolume
+expect 4 getVolume
+aumentarVolume
+expect 5 getVolume
+aumentarVolume
+expect 5 getVolume
+desligarSistema
+
+#
+
+expect false sistemaLigado
+expect false homeTheaterLigado
+expect false projetorLigado
+expect false telaProjecaoAberta
+ligarSistema
+expect true sistemaLigado
+expect true homeTheaterLigado
+expect true projetorLigado
+expect true telaProjecaoAberta
+
+expect false televisaoLigada
+
