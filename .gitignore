@@ -1,2 +1,14 @@
 /build.properties
 /bin
+
+.metadata
+
+*.version
+
+.metadata/.plugins/org.eclipse.core.resources/.root/.indexes/properties.index
+
+.DS_Store
+
+*.zargo~
+
+*.bak
