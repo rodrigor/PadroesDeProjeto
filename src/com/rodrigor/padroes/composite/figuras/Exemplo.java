@@ -25,14 +25,16 @@ public class Exemplo  extends Frame {
 		
 		
 		Circulo circulo = new Circulo("circulo",new Posicao(10,10),80);
+		Circulo circulo2 = new Circulo("c2",new Posicao(10,90),60);
 		
 		retangulo.add(circulo);
+		retangulo.add(circulo2);
 
 		Triangulo triangulo = new Triangulo("t10", new Posicao(40,0), new Posicao(0,40), new Posicao(80,40));
 
 		circulo.add(triangulo);
 		
-		Reta reta = new Reta("reta",new Posicao(0,0),new Posicao(20,20));
+		Reta reta = new Reta("reta",new Posicao(25,25),new Posicao(25,35));
 		
 		triangulo.add(reta);
 		base = retangulo;
